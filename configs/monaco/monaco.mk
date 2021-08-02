@@ -206,25 +206,27 @@ endif
 
 PRODUCT_PACKAGES += $(AUDIO_DLKM)
 
+AUDIO_HAL_DIR := hardware/qcom-caf/sm8350/audio
+
 ifneq ($(strip $(TARGET_USES_RRO)), true)
 #Audio Specific device overlays
-DEVICE_PACKAGE_OVERLAYS += vendor/qcom/opensource/audio-hal/primary-hal/configs/common/overlay
+DEVICE_PACKAGE_OVERLAYS += $(AUDIO_HAL_DIR)/configs/common/overlay
 endif
 PRODUCT_PACKAGES += $(AUDIO_AGM)
 PRODUCT_PACKAGES += $(AUDIO_PAL)
 
 PRODUCT_COPY_FILES += \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/audio_io_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_io_policy.conf \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/mixer_paths_monaco_idp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/mixer_paths_monaco_idp_amic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_amic.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/mixer_paths_monaco_idp_wsa.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_wsa.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/mixer_paths_monaco_idp_slate.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_slate.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/mixer_paths_monaco_idp_slate_amic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_slate_amic.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/mixer_paths_monaco_idp_slate_wsa.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_slate_wsa.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/audio_configs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_configs.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/audio_configs_stock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_configs_stock.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/audio_io_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_io_policy.conf \
+    $(AUDIO_HAL_DIR)/configs/monaco/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
+    $(AUDIO_HAL_DIR)/configs/monaco/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/mixer_paths_monaco_idp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/mixer_paths_monaco_idp_amic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_amic.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/mixer_paths_monaco_idp_wsa.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_wsa.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/mixer_paths_monaco_idp_slate.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_slate.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/mixer_paths_monaco_idp_slate_amic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_slate_amic.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/mixer_paths_monaco_idp_slate_wsa.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_monaco_idp_slate_wsa.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/audio_configs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_configs.xml \
+    $(AUDIO_HAL_DIR)/configs/monaco/audio_configs_stock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_configs_stock.xml \
     frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
     vendor/qcom/opensource/pal/configs/monaco/resourcemanager_monaco_idp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_monaco_idp.xml \
@@ -234,21 +236,21 @@ PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/pal/configs/monaco/resourcemanager_monaco_idp_slate_amic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_monaco_idp_slate_amic.xml \
     vendor/qcom/opensource/pal/configs/monaco/resourcemanager_monaco_idp_slate_wsa.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_monaco_idp_slate_wsa.xml \
     vendor/qcom/opensource/pal/configs/monaco/usecaseKvManager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usecaseKvManager.xml \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml
+    $(AUDIO_HAL_DIR)/configs/monaco/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml
 
 #XML Audio configuration files
 ifneq ($(TARGET_USES_AOSP_FOR_AUDIO), true)
 PRODUCT_COPY_FILES += \
-    $(TOPDIR)vendor/qcom/opensource/audio-hal/primary-hal/configs/monaco/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml
+    $(TOPDIR)$(AUDIO_HAL_DIR)/configs/monaco/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml
 endif
 PRODUCT_COPY_FILES += \
-    $(TOPDIR)vendor/qcom/opensource/audio-hal/primary-hal/configs/common/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(TOPDIR)$(AUDIO_HAL_DIR)/configs/common/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
-    $(TOPDIR)vendor/qcom/opensource/audio-hal/primary-hal/configs/common/bluetooth_qti_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_qti_audio_policy_configuration.xml
+    $(TOPDIR)$(AUDIO_HAL_DIR)/configs/common/bluetooth_qti_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_qti_audio_policy_configuration.xml
 
 # Low latency audio buffer size in frames
 PRODUCT_PROPERTY_OVERRIDES += \
